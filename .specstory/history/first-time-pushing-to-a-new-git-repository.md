@@ -239,6 +239,66 @@ Most likely, you want Option 2 if you're trying to connect your local repository
 
 ---
 
+_**User**_
+
+I want to pull the latest commit from github
+
+---
+
+_**Assistant**_
+
+
+
+# Pulling the Latest Commit from GitHub
+
+To pull the latest commit from GitHub to your local repository, you can use the following command:
+
+```bash
+git pull origin main
+```
+
+This command does two things:
+1. Fetches the latest changes from the remote repository (GitHub)
+2. Merges those changes into your current local branch
+
+## Alternative options:
+
+### If you're on a different branch than main:
+Replace "main" with your current branch name:
+```bash
+git pull origin your-branch-name
+```
+
+### If you want to pull from the branch you're tracking:
+If you've already set up tracking with `-u` flag previously, you can simply use:
+```bash
+git pull
+```
+
+### If you want to fetch without merging first:
+If you want to see what changes exist before merging them:
+```bash
+git fetch origin
+git status
+```
+Then you can merge when ready:
+```bash
+git merge origin/main
+```
+
+### If you're experiencing merge conflicts:
+You might need to resolve conflicts if your local changes conflict with remote changes:
+```bash
+git pull
+# Resolve conflicts in your editor
+git add .
+git commit -m "Resolved merge conflicts"
+```
+
+The most common and straightforward approach is simply `git pull origin main` if you're working on the main branch.
+
+---
+
 
 
 ---
