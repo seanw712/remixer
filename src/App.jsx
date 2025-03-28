@@ -14,9 +14,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [preset, setPreset] = useState({
+    persona: 'Company',
     contentType: 'Informative',
     toneOfVoice: '',
-    competitorPoints: null
+    competitorPoints: null,
+    includeIllustrations: false
   });
 
   /**
@@ -32,7 +34,7 @@ function App() {
     setError(null);
     
     try {
-      const result = await remixService.remixContent(inputText);
+      const result = await remixService.remixContent(inputText, preset);
       setOutputText(result);
     } catch (err) {
       setError(err.message || 'Failed to remix content. Please try again.');
@@ -52,7 +54,7 @@ function App() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
-        <header className="mb-12">
+        <header className="mb-8">
           <h1 className="text-4xl font-bold text-center gradient-text">
             Content Remixer
           </h1>
@@ -61,14 +63,14 @@ function App() {
           </p>
         </header>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[650px]">
+          <div className="lg:col-span-5 space-y-6 flex flex-col">
             <PresetSection onPresetChange={handlePresetChange} />
             <InputSection inputText={inputText} setInputText={setInputText} />
           </div>
           
-          <div className="space-y-6">
-            <div className="flex justify-center">
+          <div className="lg:col-span-7 flex flex-col space-y-6">
+            <div className="flex justify-center mb-2">
               <button
                 className="gradient-button"
                 onClick={handleRemix}
@@ -86,13 +88,17 @@ function App() {
               </button>
             </div>
             
-            <ErrorMessage message={error} />
+            {error && (
+              <ErrorMessage message={error} />
+            )}
             
-            <OutputSection 
-              outputText={outputText} 
-              isLoading={isLoading}
-              onLoadOutput={handleLoadOutput}
-            />
+            <div className="flex-grow flex flex-col">
+              <OutputSection 
+                outputText={outputText} 
+                isLoading={isLoading}
+                onLoadOutput={handleLoadOutput}
+              />
+            </div>
           </div>
         </div>
       </div>
