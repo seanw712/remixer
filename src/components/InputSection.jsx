@@ -6,10 +6,13 @@ import PropTypes from 'prop-types';
  */
 const InputSection = ({ inputText, setInputText }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Input</h2>
+    <div className="module-card">
+      <div className="module-header">
+        <h2 className="module-title">Input</h2>
+      </div>
       <textarea
-        className="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="textarea-input"
+        rows="6"
         placeholder="Paste your content here..."
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
